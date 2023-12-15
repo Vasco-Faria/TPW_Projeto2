@@ -17,3 +17,11 @@ class PostSerializerHomepage(serializers.Serializer):
     text = serializers.CharField()
     image = serializers.ImageField(required=False)
     video = serializers.FileField(required=False)
+    
+    
+class PostDetailSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Post
+        fields = ['id', 'text', 'image', 'video', 'author', 'comments']

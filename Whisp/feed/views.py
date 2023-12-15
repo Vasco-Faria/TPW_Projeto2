@@ -1,9 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Post
+from .models import Post,Comment,Like
 from rest_framework import status
-from .serializers import PostSerializer,PostSerializerHomepage
+from .serializers import PostSerializer,PostSerializerHomepage,CommentSerializer,PostDetailSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import DestroyAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.generics import RetrieveAPIView
+
+
 
 class PostListAPIView(APIView):
     def get(self, request, format=None):
@@ -36,3 +42,59 @@ class PostCreateAPIView(APIView):
         
       
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+class DeletePostAPIView(DestroyAPIView):
+    queryset = Post.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_destroy(self, instance):
+        user = self.request.user
+        if user == instance.author or user.is_staff:
+            instance.delete()
+        else:
+            raise PermissionDenied("Você não tem permissão para excluir este post.")
+
+
+class CreateCommentAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, post_id, format=None):
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=request.user, post_id=post_id)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+class DeleteCommentAPIView(DestroyAPIView):
+    queryset = Comment.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_destroy(self, instance):
+        user = self.request.user
+        if user == instance.author or user.is_staff:
+            instance.delete()
+        else:
+            raise PermissionDenied("Você não tem permissão para excluir este comentário.")
+
+
+
+
+class LikePostAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, post_id, format=None):
+        post = Post.objects.get(id=post_id)
+        if request.user in post.likes.all():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+        return Response({"status": "like status changed"}, status=status.HTTP_200_OK)
+
+
+class DetailPostAPIView(RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostDetailSerializer
