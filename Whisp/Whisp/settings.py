@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_framework_authtoken',
-    'rest_auth.registration',
-    'rest_auth',
+    'dj_rest_auth',
+    'rest_framework.authtoken',
+    'dj_rest_auth.registration',
     'corsheaders',
     'sorl.thumbnail',
 ]
@@ -59,13 +59,19 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-     'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 REST_FRAMEWORK ={
-    'DEFAULT_PERMISSION_CLASSES':[
+    'DEFAULT_PERMISSION_CLASSES':(
         'rest_framework.permissions.AllowAny',
-    ]
+    ),
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication', 
+        
+    ),
+    
 }
 
 CORS_ORIGIN_ALLOW_ALL=True
