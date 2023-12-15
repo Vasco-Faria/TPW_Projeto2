@@ -19,12 +19,14 @@ from django.urls import path
 from django.urls.conf import include
 from .views import change_password
 from feed import urls as feed_urls
+from profiles import urls as profiles_urls
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include(feed_urls,namespace='feed')),
+    path("profile/",include(profiles_urls,namespace='profiles')),
     path('rest-auth/', include('dj_rest_auth.urls')),
     path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('change-password/', change_password, name='change_password'),
