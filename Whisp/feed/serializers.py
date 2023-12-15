@@ -10,3 +10,10 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id','author','post','body','date']
+        
+        
+
+class PostSerializerHomepage(serializers.Serializer):
+    text = serializers.CharField()
+    image = serializers.ImageField(required=False)
+    video = serializers.FileField(required=False)
