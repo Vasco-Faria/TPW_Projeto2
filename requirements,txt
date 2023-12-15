@@ -1,0 +1,12 @@
+Django
+
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+pip install django-cors-headers
+
+django==4.2.5
+django-allauth
+sorl-thumbnail
+pillow
+django-notifications-hq
