@@ -79,6 +79,13 @@ REST_FRAMEWORK ={
     
 }
 
+AUTHENTICATION_CLASSES = [
+    # ...
+    'dj_rest_auth.authentication.AllAuthJWTAuthentication',
+]
+
+AUTH_USER_MODEL = 'your_app.YourUserModel'      #mudar
+
 CORS_ORIGIN_ALLOW_ALL=True
 
 ROOT_URLCONF = 'Whisp.urls'

@@ -19,7 +19,7 @@
 <div class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
     <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
       <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200 py-5">
-        <form class="login text-center" method="post" action="{% url 'account_login' %}">
+        <form class="login text-center" method="post" action="{% url 'rest_login' %}">
           {% csrf_token %}
           <br>
           {{ form.login.label_tag }}
@@ -30,7 +30,9 @@
           <br>
           {{ form.remember.label_tag }}
           {{ form.remember }}
-          <button class="primaryAction text-white mt-5 mb-4 bg-indigo-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">{% trans "Sign In" %}</button>
+          <button (click)="submitForm()" class="primaryAction text-white mt-5 mb-4 bg-indigo-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+            {% trans "Sign In" %}
+          </button>
         </form>
         <div class="p-5">
             <div class="grid grid-cols-3 gap-1">
