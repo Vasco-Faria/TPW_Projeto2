@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from .views import change_password
+from .views import UserListView, change_password
 from feed import urls as feed_urls
 from profiles import urls as profiles_urls
 from notify import urls as notify_urls
@@ -27,6 +27,7 @@ from followers import urls as followers_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', UserListView.as_view(), name='user-list'),
     path("",include(feed_urls,namespace='feed')),
     path("profile/",include(profiles_urls,namespace='profiles')),
     path('rest-auth/', include('dj_rest_auth.urls')),
