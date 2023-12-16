@@ -20,6 +20,8 @@ from django.urls.conf import include
 from .views import change_password
 from feed import urls as feed_urls
 from profiles import urls as profiles_urls
+from notify import urls as notify_urls
+from followers import urls as followers_urls
 
 
 
@@ -30,4 +32,6 @@ urlpatterns = [
     path('rest-auth/', include('dj_rest_auth.urls')),
     path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('change-password/', change_password, name='change_password'),
+    path('notify/', include(notify_urls,namespace='notify')), 
+    path('followers/', include(followers_urls,namespace='followers')), 
 ]

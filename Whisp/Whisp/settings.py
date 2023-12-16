@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'feed',
     'profiles',
+    'followers',
+    'notify',
+    'notifications',
 ]
 
 
