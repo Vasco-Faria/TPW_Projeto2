@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe(
       (response) => {
         console.log('Login successful', response);
+        
       },
       (error) => {
         console.error('Login failed', error);
