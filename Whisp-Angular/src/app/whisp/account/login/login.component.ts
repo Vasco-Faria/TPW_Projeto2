@@ -1,7 +1,7 @@
 // login.component.ts
 
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +18,8 @@ import { AuthService } from './auth.service';
   `,
 })
 export class LoginComponent {
-  username: string;
-  password: string;
+  username: string = '';
+  password: string = '';
 
   constructor(private authService: AuthService) {}
 
