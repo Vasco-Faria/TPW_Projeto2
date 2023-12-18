@@ -1,0 +1,7 @@
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="text">
+    <input type="file" formControlName="image" (change)="onFileChange($event, 'image')">
+    <input type="file" formControlName="video" (change)="onFileChange($event, 'video')">
+    <button type="submit">Create Post</button>
+   </form>
+   
