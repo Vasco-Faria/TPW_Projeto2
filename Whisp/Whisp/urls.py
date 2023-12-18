@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from .views import UserListView, change_password
+from .views import UserListView, change_password,get_user_info
 from feed import urls as feed_urls
 from profiles import urls as profiles_urls
 from notify import urls as notify_urls
@@ -35,4 +35,5 @@ urlpatterns = [
     path('change-password/', change_password, name='change_password'),
     path('notify/', include(notify_urls,namespace='notify')), 
     path('followers/', include(followers_urls,namespace='followers')), 
+    path('user_info/<str:email>/', get_user_info, name='get_user_info'),
 ]

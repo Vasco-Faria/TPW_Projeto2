@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -29,3 +30,15 @@ def change_password(request):
 class UserListView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_user_info(request, email):
+    try:
+        user = User.objects.get(email=email)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
