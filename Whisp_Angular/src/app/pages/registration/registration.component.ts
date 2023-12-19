@@ -44,8 +44,8 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  goToWhispFeed(): void {
-    // Implement navigation to Whisp feed
-    console.log('Navigating to Whisp feed');
+  gobacktoFeed() {
+    this.router.navigate(['/']);
   }
+  
 }

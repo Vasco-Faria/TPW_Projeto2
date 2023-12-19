@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../..//services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { LoginModule } from './login.module';
 
 @Component({
@@ -44,4 +44,9 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  gobacktoFeed() {
+    this.router.navigate(['/']);
+  }
+  
 }
