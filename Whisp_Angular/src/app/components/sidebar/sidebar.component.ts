@@ -1,22 +1,22 @@
-// sidebar.component.ts
-
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { SidebarModule } from './sidebar.module';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'] // Fix the typo in 'styleUrl' to 'styleUrls'
 })
-export class SidebarComponent implements OnInit {
-  isAuthenticated: boolean = false;
+export class SidebarComponent {
+  // Remove the duplicate declaration of authService
+  authService: AuthService;
 
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.authService.isAuthenticated().subscribe(isAuthenticated => {
-      this.isAuthenticated = isAuthenticated;
-    });
+  // Inject the AuthService in the constructor
+  constructor(authService: AuthService) {
+    this.authService = authService;
   }
+
+  logout() {
+    this.authService.logout();
+  }
+  
 }

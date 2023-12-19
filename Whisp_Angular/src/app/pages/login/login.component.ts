@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../..//services/auth.service';
 import { LoginModule } from './login.module';
 
@@ -11,8 +12,10 @@ import { LoginModule } from './login.module';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({});
+  token = ""
+  
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -21,12 +24,21 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
   submitForm() {
     const { username, password } = this.loginForm.value;
     this.authService.login(username, password).subscribe(
       (response) => {
         console.log('Login successful', response);
+
+        let data_json = JSON.parse(JSON.stringify(response))
+        this.token = data_json.token;
+        console.log(this.token)
+        localStorage.setItem('key', this.token);
         
+        this.authService.checkAuthentication();
+
+        this.router.navigate(['/']);
       },
       (error) => {
         console.error('Login failed', error);

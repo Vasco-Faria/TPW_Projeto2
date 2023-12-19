@@ -8,9 +8,13 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  private currentUser: any = null;
+  private isAuthenticated = false;
   private apiUrl = 'http://localhost:8000/'; // Update with your Django API URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.checkAuthentication();
+  }
 
   login(username: string, password: string): Observable<any> {
     const url = `${this.apiUrl}rest-auth/login/`;
@@ -22,10 +26,22 @@ export class AuthService {
     return this.http.post(url, { username, email, password1, password2 });
   }
 
-  isAuthenticated(): Observable<boolean> {
-    const url = `${this.apiUrl}rest-auth/user/`;
-    return this.http.get(url).pipe(
-      map((user: any) => !!user)
-    );
+  logout() {
+    localStorage.removeItem('key');
   }
+
+  getUserInfo(email: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user_info/${email}`);
+  }
+
+  checkAuthentication() {
+    const key = localStorage.getItem('key');
+    this.isAuthenticated = !!key;
+  }
+
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
+  }
+
+
 }
