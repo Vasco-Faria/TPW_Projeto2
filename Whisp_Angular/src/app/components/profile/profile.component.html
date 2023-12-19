@@ -1,1 +1,39 @@
 <p>profile works!</p>
+<!-- profile.component.html -->
+<div *ngIf="user">
+    <div class="rounded-3xl overflow-hidden shadow-xl max-w-md mx-auto my-3 text-black bg-white-500">
+      <!-- Add your image loading logic here -->
+      <div>
+        <img [src]="user.profile.bg_image" alt="Background Image">
+      </div>
+      <div class="flex justify-center">
+        <img [src]="user.profile.image" alt="Profile Image" class="rounded-full border-solid border-white border-2 -mt-3">
+      </div>
+      <div class="text-center px-3 pb-6 pt-2">
+        <h3 class="text-lg font-bold font-sans">{{user.username}}</h3>
+        <!-- Add your follow/unfollow button logic here -->
+        <!-- <button (click)="toggleFollow()" class="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 mt-4 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-1 px-3 inline-flex items-center" type='button'>
+          <span class="mr-2 text-sm">
+            {{ user.following ? 'Unfollow' : 'Follow' }}
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+          </svg>
+        </button>
+      </div> -->
+      <!-- Add your posts container here -->
+      <!-- <div id="posts-container" style="text-align:center;margin-top:5rem">
+        <div *ngFor="let post of posts">
+          <ng-container [ngTemplateOutlet]="postTemplate" [ngTemplateOutletContext]="{post: post, showDetailLink: true}"></ng-container>
+          <hr/>
+        </div>
+      </div>
+    </div> -->
+  
+    <!-- Add your biography section here
+    <div class="rounded-3xl overflow-hidden shadow-xl max-w-md mx-auto my-3 text-black bg-white-500">
+      <h3 class="text-lg font-bold font-sans text-center">Biography</h3>
+      <p>{{ user.profile.biography || 'No biography' }}</p>
+    </div> -->
+  </div>
+  
