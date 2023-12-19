@@ -22,7 +22,9 @@ class PostListAPIView(APIView):
 
 class PostCreateAPIView(APIView):
     def post(self, request, format=None):
+        print(request.data)
         serializer = PostSerializerHomepage(data=request.data)
+        
 
         if serializer.is_valid():
             post_data = serializer.validated_data

@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 import { RegistrationModule } from './registration.module';
 
 @Component({
@@ -12,7 +13,7 @@ import { RegistrationModule } from './registration.module';
 export class RegistrationComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -25,7 +26,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log('ola')
     if (this.registerForm.valid) {
       const { email, username, password1, password2 } = this.registerForm.value;
       
@@ -34,6 +34,7 @@ export class RegistrationComponent implements OnInit {
         response => {
           // Handle successful registration
           console.log('Registration successful', response);
+          this.router.navigate(['/login']);
         },
         error => {
           // Handle registration error

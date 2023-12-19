@@ -1,19 +1,26 @@
-<div class="flex justify-center ml-56">
+<app-sidebar class="fixed left-0 top-0 h-screen"></app-sidebar>
+<div class="flex items-center justify-center min-h-screen ml-56">
     <div class="max-w-2xl max-h-xl px-10 my-4 py-6 bg-white rounded-lg shadow-md" style='width:50rem;'>
+        <br>
+        <h1 class='text-black text-center text-4xl'>Create a New Post</h1>
+        <hr class="mb-4 mt-4">
+        <br>
+        <br>
         <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-            <div class="mb-4 flex items-center">
-                <label for="text" class="block text-sm font-medium text-gray-600 mr-5">Text:</label>
+            <div class="mb-4">
+                <label for="text" class="block text-lg font-medium text-gray-600">Text:</label>
                 <input type="text" id="text" formControlName="text" class="mt-1 p-2 border rounded-md w-full">
-              </div>
-            <div class="mb-4 flex items-center">
-                <label for="image" class="block text-sm font-medium text-gray-600 mr-2">Image:</label>
+            </div>
+            <div class="mb-4">
+                <label for="image" class="block text-lg font-medium text-gray-600">Image:</label>
                 <input type="file" id="image" formControlName="image" (change)="onFileChange($event, 'image')" class="mt-1 p-2 border rounded-md w-full">
             </div>
 
-            <div class="mb-4 flex items-center">
-                <label for="video" class="block text-sm font-medium text-gray-600 mr-2">Video:</label>
+            <div class="mb-4">
+                <label for="video" class="block text-lg font-medium text-gray-600">Video:</label>
                 <input type="file" id="video" formControlName="video" (change)="onFileChange($event, 'video')" class="mt-1 p-2 border rounded-md w-full">
             </div>
+            <br>
             <div style="margin-left: 70%;">
                 <button class="bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
                     <span class="mr-2 text-sm">Create Post</span>

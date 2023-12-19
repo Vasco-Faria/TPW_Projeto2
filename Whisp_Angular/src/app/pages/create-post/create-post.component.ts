@@ -3,18 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { New_PostModule } from './new_post.module';
+import { Create_PostModule } from './create_post.module';
 import { userInfo } from 'os';
 
+
 @Component({
-  selector: 'app-new-post',
-  templateUrl: './new-post.component.html',
-  styleUrl: './new-post.component.css'
+  selector: 'app-create-post',
+  templateUrl: './create-post.component.html',
+  styleUrl: './create-post.component.css'
 })
-export class NewPostComponent {
+export class CreatePostComponent {
   postForm: FormGroup = new FormGroup({});
   userId: string | null = null;
 
+  
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
  
   ngOnInit() {
