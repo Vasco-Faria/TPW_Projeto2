@@ -35,9 +35,9 @@ class UserListView(ListAPIView):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_user_info(request, email):
+def get_user_info(request, username):
     try:
-        user = User.objects.get(email=email)
+        user = User.objects.get(username=username)
         serializer = UserSerializer(user)
         return Response(serializer.data)
     except User.DoesNotExist:

@@ -18,6 +18,17 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     const url = `${this.apiUrl}rest-auth/login/`;
+    if (url) {
+      this.getUserInfo(username).subscribe(
+        (userInfo) => {
+          console.log('User Info:', userInfo);
+        },
+        (error) => {
+          console.error('Error getting user info:', error);
+        }
+      );
+        
+    }
     return this.http.post(url, { username, password });
   }
 
@@ -30,14 +41,14 @@ export class AuthService {
     localStorage.removeItem('key');
   }
 
-  getUserInfo(email: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user_info/${email}`);
+  getUserInfo(username: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}user_info/${username}/`);
   }
 
   checkAuthentication() {
     const key = localStorage.getItem('key');
     this.isAuthenticated = !!key;
-  }
+      }
 
   isLoggedIn(): boolean {
     return this.isAuthenticated;

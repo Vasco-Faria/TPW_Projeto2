@@ -1,7 +1,11 @@
-<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="text">
-    <input type="file" formControlName="image" (change)="onFileChange($event, 'image')">
-    <input type="file" formControlName="video" (change)="onFileChange($event, 'video')">
-    <button type="submit">Create Post</button>
-</form>
-   
+
+<div class="flex justify-center">
+    <div class="max-w-2xl max-h-xl px-10 my-4 py-6 bg-white rounded-lg shadow-md" style='width:50rem;'>
+        <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+            <input type="text" formControlName="text">
+            <input type="file" formControlName="image" (change)="onFileChange($event, 'image')">
+            <input type="file" formControlName="video" (change)="onFileChange($event, 'video')">
+            <button type="submit">Create Post</button>
+        </form>
+    </div>
+</div>

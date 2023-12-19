@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'notifications',
 ]
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200", 
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

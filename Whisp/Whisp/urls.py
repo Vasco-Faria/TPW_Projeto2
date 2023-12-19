@@ -35,5 +35,5 @@ urlpatterns = [
     path('change-password/', change_password, name='change_password'),
     path('notify/', include(notify_urls,namespace='notify')), 
     path('followers/', include(followers_urls,namespace='followers')), 
-    path('user_info/<str:email>/', get_user_info, name='get_user_info'),
+    path('user_info/<str:username>/', get_user_info, name='get_user_info'),
 ]
