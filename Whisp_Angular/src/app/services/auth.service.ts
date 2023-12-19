@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +22,10 @@ export class AuthService {
     return this.http.post(url, { username, email, password1, password2 });
   }
 
-  //adicionar reset password maybe
+  isAuthenticated(): Observable<boolean> {
+    const url = `${this.apiUrl}rest-auth/user/`;
+    return this.http.get(url).pipe(
+      map((user: any) => !!user)
+    );
+  }
 }
