@@ -30,6 +30,14 @@
                     </video>
                 </ng-container>
             </div>
+
+            <div class="flex justify-between items-center mt-3">
+                <div class="ml-auto">
+                    <a class="flex items-center" [href]="'/profiles/detail/' + post.author_username">
+                        <h1 class="text-gray-700 font-bold" style="margin-right: 1rem;">{{ post.author_username }}</h1>
+                    </a>
+                </div>
+            </div>            
         </div>
         </div>
         <script src="js/main.js"></script>

@@ -4,9 +4,13 @@ from .models import Post, Comment
 class PostSerializer(serializers.ModelSerializer):
     likes_count = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
+    author_username = serializers.SerializerMethodField()
     class Meta:
         model = Post
-        fields = ['id', 'text', 'image', 'video', 'author', 'date','likes_count', 'comments_count']
+        fields = ['id', 'text', 'image', 'video', 'author_username', 'date','likes_count', 'comments_count']
+
+    def get_author_username(self, obj):
+        return obj.author.username
         
     def get_likes_count(self, obj):
         return obj.likes.count()
@@ -22,6 +26,7 @@ class CommentSerializer(serializers.ModelSerializer):
         
 
 class PostSerializerHomepage(serializers.Serializer):
+    userId = serializers.IntegerField()
     text = serializers.CharField()
     image = serializers.ImageField(required=False)
     video = serializers.FileField(required=False)

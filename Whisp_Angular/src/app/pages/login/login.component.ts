@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
 
         let data_json = JSON.parse(JSON.stringify(response))
         this.token = data_json.token;
-        console.log(this.token)
         localStorage.setItem('key', this.token);
         
         this.authService.checkAuthentication();

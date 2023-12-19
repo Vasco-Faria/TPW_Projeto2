@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { New_PostModule } from './new_post.module';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-new-post',
@@ -11,46 +12,61 @@ import { New_PostModule } from './new_post.module';
 })
 export class NewPostComponent {
   postForm: FormGroup = new FormGroup({});
+  userId: string | null = null;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
  
   ngOnInit() {
+
+    const userInfo = localStorage.getItem('userInfo');
+    console.log(userInfo);
+    if (userInfo) {
+      this.userId = JSON.parse(userInfo).id;
+    }
+
+
    this.postForm = this.formBuilder.group({
      text: ['', Validators.required],
-     image: ['', Validators.required],
-     video: ['', Validators.required]
+     image: [null],
+     video: [null]
    });
   }
  
   onSubmit() {
     const formData = new FormData();
-    Object.entries(this.postForm.value).forEach(([key, value]) => {
-      if (typeof value === 'string' || value instanceof Blob) {
-        formData.set(key, value as string | Blob);
+
+    console.log(this.userId);
+    if (this.userId) {
+      formData.append('userId', this.userId);
+    }
+
+    formData.append('text', this.postForm.value.text);
+    if (this.postForm.value.image) {
+      formData.append('image', this.postForm.value.image);
+    }
+    if (this.postForm.value.video) {
+      formData.append('video', this.postForm.value.video);
+    }
+
+    this.http.post('http://localhost:8000/post/create/', formData).subscribe(
+      response => {
+        console.log('Post criado com sucesso', response);
+
+      },
+      error => {
+        console.error('Erro ao criar post', error);
       }
-    });
-    
-   this.http.post('http://localhost:8000/post/create/', formData).subscribe(
-     response => {
-       // Handle successful response here
-     },
-     error => {
-       // Handle error here
-     }
-   );
+    );
   }
 
-  onFileChange(event: any, field: any) {
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      const control = this.postForm.get(field);
-      if (control) {
-        control.setValue(file);
-      }
+  onFileChange(event: Event, field: string) {
+    const element = event.currentTarget as HTMLInputElement;
+    let file: File | null = null;
+    if (element.files && element.files.length) {
+      file = element.files[0];
     }
-   }
-   
-   
+    this.postForm.get(field)?.setValue(file);
+  }
+
 
 }
-

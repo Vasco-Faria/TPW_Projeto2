@@ -8,6 +8,7 @@ from rest_framework.generics import DestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import RetrieveAPIView
+from django.contrib.auth.models import User
 
 
 
@@ -20,28 +21,33 @@ class PostListAPIView(APIView):
 
 
 class PostCreateAPIView(APIView):
-    permission_classes = [IsAuthenticated]
     def post(self, request, format=None):
         serializer = PostSerializerHomepage(data=request.data)
 
         if serializer.is_valid():
-           
             post_data = serializer.validated_data
 
-            
+            # Obter userId do request
+            user_id = post_data.get('userId')
+            print(user_id)  
+
+            try:
+                user = User.objects.get(id=user_id)
+            except User.DoesNotExist:
+                return Response({"error": "Usuário não encontrado."}, status=status.HTTP_404_NOT_FOUND)
+
             post = Post(
                 text=post_data.get('text'),
                 image=post_data.get('image'),
                 video=post_data.get('video'),
-                author=request.user  
+                author=user  # Usar o usuário obtido
             )
             post.save()
 
-            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-      
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     
     
 class DeletePostAPIView(DestroyAPIView):

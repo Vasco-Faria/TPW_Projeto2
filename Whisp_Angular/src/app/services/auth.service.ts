@@ -18,19 +18,31 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     const url = `${this.apiUrl}rest-auth/login/`;
-    if (url) {
-      this.getUserInfo(username).subscribe(
-        (userInfo) => {
-          console.log('User Info:', userInfo);
-        },
-        (error) => {
-          console.error('Error getting user info:', error);
-        }
-      );
-        
-    }
-    return this.http.post(url, { username, password });
+  
+    return this.http.post(url, { username, password }).pipe(
+      map((response) => {
+        let data_json = JSON.parse(JSON.stringify(response));
+        const token = data_json.token;
+  
+        // Save the token to localStorage
+        localStorage.setItem('key', token);
+  
+        // Get user info and save it to localStorage
+        this.getUserInfo(username).subscribe(
+          (userInfo) => {
+            console.log('User Info:', userInfo);
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+          },
+          (error) => {
+            console.error('Error getting user info:', error);
+          }
+        );
+  
+        return response;
+      })
+    );
   }
+  
 
   register(username: string, email: string, password1: string, password2: string): Observable<any> {
     const url = `${this.apiUrl}rest-auth/registration/`;
