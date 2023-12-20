@@ -1,8 +1,10 @@
 // auth.service.ts
 
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { CommonModule, DOCUMENT } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +12,9 @@ import { Observable, map } from 'rxjs';
 export class AuthService {
   private currentUser: any = null;
   private isAuthenticated = false;
-  private apiUrl = 'http://localhost:8000/'; // Update with your Django API URL
+  private apiUrl = 'http://localhost:8000/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {
     this.checkAuthentication();
   }
 
@@ -58,9 +60,11 @@ export class AuthService {
   }
 
   checkAuthentication() {
-    const key = localStorage.getItem('key');
-    this.isAuthenticated = !!key;
-      }
+    if (this.document.defaultView && this.document.defaultView.localStorage) {
+      const key = this.document.defaultView.localStorage.getItem('key');
+      this.isAuthenticated = !!key;
+    }
+  }
 
   isLoggedIn(): boolean {
     return this.isAuthenticated;

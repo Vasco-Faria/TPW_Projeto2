@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -17,22 +17,22 @@ export class CreatePostComponent {
   userId: string | null = null;
 
   
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, @Inject(PLATFORM_ID) private platformId: any, private router: Router) { }
  
   ngOnInit() {
-
-    const userInfo = localStorage.getItem('userInfo');
-    console.log(userInfo);
-    if (userInfo) {
-      this.userId = JSON.parse(userInfo).id;
+    if (isPlatformBrowser(this.platformId)) {
+      const userInfo = localStorage.getItem('userInfo');
+      console.log(userInfo);
+      if (userInfo) {
+        this.userId = JSON.parse(userInfo).id;
+      }
     }
 
-
-   this.postForm = this.formBuilder.group({
-     text: ['', Validators.required],
-     image: [null],
-     video: [null]
-   });
+    this.postForm = this.formBuilder.group({
+      text: ['', Validators.required],
+      image: [null],
+      video: [null]
+    });
   }
  
   onSubmit() {
