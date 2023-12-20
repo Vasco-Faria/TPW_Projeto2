@@ -55,10 +55,7 @@ export class CreatePostComponent {
       response => {
         console.log('Post criado com sucesso', response);
 
-        // Recarrega a página atual
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate([this.router.url]);
+        this.router.navigate(["/"]);
 
       },
       error => {

@@ -73,6 +73,6 @@ export class NewPostComponent {
     }
     this.postForm.get(field)?.setValue(file);
   }
-
+  
 
 }
