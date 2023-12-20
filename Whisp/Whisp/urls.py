@@ -17,12 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from django.conf.urls.static import static
+from django.conf import settings
 from .views import UserListView, change_password,get_user_info
 from feed import urls as feed_urls
 from profiles import urls as profiles_urls
 from notify import urls as notify_urls
 from followers import urls as followers_urls
-
 
 
 urlpatterns = [
@@ -37,3 +38,7 @@ urlpatterns = [
     path('followers/', include(followers_urls,namespace='followers')), 
     path('user_info/<str:username>/', get_user_info, name='get_user_info'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
