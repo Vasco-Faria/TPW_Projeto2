@@ -11,6 +11,7 @@ import { ProfileModule } from './profile.module';
 })
 export class ProfileComponent implements OnInit {
   username: string | null = null;
+  userInfo: any = null;
   userProfile: any = null;
   BackGroundImage: string = 'http://localhost:8000/media/bg_image/back_default.jpg';
   ProfileImage: string = 'http://localhost:8000/media/profiles/default_user.jpg';
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
       if (userInfoString) {
         const userInfo = JSON.parse(userInfoString);
         this.username = userInfo.username;
+        this.userInfo = userInfo;
       }
     }
 
