@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,14 +9,24 @@ import { AuthService } from '../../services/auth.service';
 export class SidebarComponent {
   // Remove the duplicate declaration of authService
   authService: AuthService;
+  userName: string | null = null;
 
   // Inject the AuthService in the constructor
   constructor(authService: AuthService) {
     this.authService = authService;
   }
 
+  ngOnInit() {
+    const userInfo = localStorage.getItem('userInfo');
+    console.log(userInfo);
+    if (userInfo) {
+      this.userName = JSON.parse(userInfo).username;
+    }
+  }
+
+
   logout() {
     this.authService.logout();
   }
-  
+
 }

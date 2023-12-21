@@ -2,7 +2,7 @@
 
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, mergeMap, tap } from 'rxjs';
 import { CommonModule, DOCUMENT } from '@angular/common';
 
 
@@ -34,12 +34,19 @@ export class AuthService {
           (userInfo) => {
             console.log('User Info:', userInfo);
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
-          },
-          (error) => {
-            console.error('Error getting user info:', error);
+
+            //Get user profile and save it to localStorage
+            this.getUserProfile(userInfo.id).subscribe(
+              (userProfile) => {
+                console.log('User Profile:', userProfile);
+                localStorage.setItem('userProfile', JSON.stringify(userProfile));
+              },
+              (error) => {
+                console.error('Error getting user profile:', error);
+              }
+            );
           }
         );
-  
         return response;
       })
     );
@@ -69,6 +76,36 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
+
+  getUserProfile(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}profile/user/${id}/`);
+  }
+
+  profile(username: string): Observable<any> {
+    return this.getUserInfo(username).pipe(
+      mergeMap((userInfo) => {
+        console.log('User Info:', userInfo);
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+  
+        // Get user profile and save it to localStorage
+        return this.getUserProfile(userInfo.id).pipe(
+          tap((userProfile) => {
+            console.log('User Profile:', userProfile);
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+          }),
+          catchError((error) => {
+            console.error('Error getting user profile:', error);
+            throw error; // Rethrow the error
+          })
+        );
+      }),
+      catchError((error) => {
+        console.error('Error getting user info:', error);
+        throw error; // Rethrow the error
+      })
+    );
+  }
+  
 
 
 }
