@@ -30,7 +30,7 @@ export class PostsComponent implements OnInit {
     (response) => {
       console.log('Profile retrieval successful', response);
 
-      // Extraia as informações do perfil da resposta
+     
       const profileInfo = {
         user: response.user,
         image: response.image,
@@ -39,7 +39,7 @@ export class PostsComponent implements OnInit {
         followers_count: response.followers_count
       };
 
-      // Salve as informações do perfil no localStorage
+     
       localStorage.setItem('otheruserProfile', JSON.stringify(profileInfo));
 
       this.router.navigate(['/profile']);
