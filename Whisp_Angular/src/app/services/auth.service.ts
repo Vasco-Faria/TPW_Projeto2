@@ -20,15 +20,15 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     const url = `${this.apiUrl}rest-auth/login/`;
-  
+
     return this.http.post(url, { username, password }).pipe(
       map((response) => {
         let data_json = JSON.parse(JSON.stringify(response));
         const token = data_json.token;
-  
+
         // Save the token to localStorage
         localStorage.setItem('key', token);
-  
+
         // Get user info and save it to localStorage
         this.getUserInfo(username).subscribe(
           (userInfo) => {
@@ -51,7 +51,7 @@ export class AuthService {
       })
     );
   }
-  
+
 
   register(username: string, email: string, password1: string, password2: string): Observable<any> {
     const url = `${this.apiUrl}rest-auth/registration/`;
@@ -81,12 +81,12 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}profile/user/${id}/`);
   }
 
-  profile(username: string): Observable<any> {
+  myprofile(username: string): Observable<any> {
     return this.getUserInfo(username).pipe(
       mergeMap((userInfo) => {
         console.log('User Info:', userInfo);
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
-  
+
         // Get user profile and save it to localStorage
         return this.getUserProfile(userInfo.id).pipe(
           tap((userProfile) => {
@@ -105,7 +105,34 @@ export class AuthService {
       })
     );
   }
-  
+
+  otherprofile(username: string): Observable<any> {
+    return this.getUserInfo(username).pipe(
+      mergeMap((otheruserInfo) => {
+        console.log('Other User Info:', otheruserInfo);
+        localStorage.setItem('otheruserInfo', JSON.stringify(otheruserInfo));
+
+        // Get user profile and save it to localStorage
+        return this.getUserProfile(otheruserInfo.id).pipe(
+          tap((otheruserProfile) => {
+            console.log('Other User Profile:', otheruserProfile);
+            localStorage.setItem('otheruserProfile', JSON.stringify(otheruserProfile));
+          }),
+          catchError((error) => {
+            console.error('Error getting other user profile:', error);
+            throw error; // Rethrow the error
+          })
+        );
+      }),
+      catchError((error) => {
+        console.error('Error getting other user info:', error);
+        throw error; // Rethrow the error
+      })
+    );
+  }
+
+
+
 
 
 }

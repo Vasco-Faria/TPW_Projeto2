@@ -26,7 +26,7 @@ export class PostsComponent implements OnInit {
  }
 
  profile(username: string) {
-  this.authService.profile(username).subscribe(
+  this.authService.otherprofile(username).subscribe(
     (response) => {
       console.log('Profile retrieval successful', response);
 
@@ -40,9 +40,9 @@ export class PostsComponent implements OnInit {
       };
 
       // Salve as informações do perfil no localStorage
-      localStorage.setItem('userProfile', JSON.stringify(profileInfo));
+      localStorage.setItem('otheruserProfile', JSON.stringify(profileInfo));
 
-      this.router.navigate(['/profile', username]);
+      this.router.navigate(['/profile']);
       },
       (error) => {
         console.error('Profile retrieval failed', error);
