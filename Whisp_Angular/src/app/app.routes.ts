@@ -5,11 +5,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegistrationComponent },
     { path: 'create_post', component: CreatePostComponent },
     { path: '', component: HomepageComponent},
-    { path: 'profile', component: ProfileComponent}
+    { path: 'profile', component: ProfileComponent},
+    { path: 'my_profile', component: MyProfileComponent}
 ];
