@@ -67,12 +67,7 @@ export class EditprofileComponent implements OnInit {
         }
       );
     }
-    this.userForm.patchValue({
-      username: this.userInfo.username,
-      first_name: this.userInfo.first_name,
-      last_name: this.userInfo.last_name,
-      email: this.userInfo.email
-    });
+    this.userForm.patchValue(this.userInfo);
   }
 
   updateMyProfile() {
