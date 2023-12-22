@@ -103,6 +103,7 @@ export class EditprofileComponent implements OnInit {
           }
         );
       }
+      this.router.navigate(['/']);
     }
   }
 

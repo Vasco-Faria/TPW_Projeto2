@@ -25,3 +25,14 @@
 
 + CRIAÇÂO DE POSTS
     - Upload de posts de texto/?Images/Video?
+
+
+## **Para Correr**
+
+- Fazer no diretório Whisp:
+
+`python3 manage.py runserver`
+
+- Fazer no diretótio Whisp_Angular:
+
+`npm start`

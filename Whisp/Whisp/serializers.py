@@ -2,16 +2,17 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 class ChangePasswordSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     new_password = serializers.CharField(write_only=True, required=True)
-    new_password_confirm = serializers.CharField(write_only=True, required=True)
+    confirm_password = serializers.CharField(write_only=True, required=True)
 
     def validate(self, data):
         """
-        Verifique se as duas novas senhas correspondem.
+        Verify if the two new passwords match.
         """
-        if data['new_password'] != data['new_password_confirm']:
-            raise serializers.ValidationError("As novas senhas não coincidem")
+        if data['new_password'] != data['confirm_password']:
+            raise serializers.ValidationError("The new passwords do not match")
         return data
     
 

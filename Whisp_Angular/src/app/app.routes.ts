@@ -7,6 +7,7 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { EditprofileComponent } from './pages/editprofile/editprofile.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -15,5 +16,6 @@ export const routes: Routes = [
     { path: '', component: HomepageComponent},
     { path: 'profile', component: ProfileComponent},
     { path: 'my_profile', component: MyProfileComponent},
-    { path: 'edit_profile', component: EditprofileComponent}
+    { path: 'edit_profile', component: EditprofileComponent},
+    { path: 'forgot_password', component: ForgotPasswordComponent },
 ];

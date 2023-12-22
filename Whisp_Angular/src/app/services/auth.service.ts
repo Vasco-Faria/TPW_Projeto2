@@ -139,6 +139,12 @@ export class AuthService {
     return this.http.put(`${this.apiUrl}profile/user/${id}/`, updatedUserProfile);
   }
 
+  changePassword(passwordInfo: any): Observable<any> {    
+    const options = {
+    withCredentials: true,  // Include this option
+    };
 
+    return this.http.post(`${this.apiUrl}change-password/`, passwordInfo, options);
+  }
 
 }
