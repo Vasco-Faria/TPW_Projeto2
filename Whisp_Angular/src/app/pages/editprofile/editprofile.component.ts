@@ -18,6 +18,8 @@ export class EditprofileComponent implements OnInit {
   username: string | null = null;
   userInfo: any = null;
   userProfile: any = null;
+  BackGroundImage: string = 'http://localhost:8000/media/bg_image/back_default.jpg';
+  ProfileImage: string = 'http://localhost:8000/media/profiles/default_user.jpg';
 
   // Declare a FormGroup for user info and user profile
   userForm: FormGroup;
@@ -30,9 +32,13 @@ export class EditprofileComponent implements OnInit {
   ) {
     // Initialize the form in the constructor
     this.userForm = this.formBuilder.group({
-      username: [this.userInfo?.username || ''],
-      email: [this.userInfo?.email || ''],
-      biography: [this.userProfile?.biography || '']
+      username: [''],
+      first_name: [''],
+      last_name: [''],
+      email: [''],
+      Image: [null],
+      BackGroundImage: [null],
+      biography: ['']
     });
   }
 
@@ -51,12 +57,22 @@ export class EditprofileComponent implements OnInit {
         (userProfile) => {
           console.log('User Profile retrieval successful', userProfile);
           this.userProfile = userProfile;
+
+          this.userForm.patchValue({
+            biography: userProfile.biography
+          });
         },
         (error) => {
           console.error('User Profile retrieval failed', error);
         }
       );
     }
+    this.userForm.patchValue({
+      username: this.userInfo.username,
+      first_name: this.userInfo.first_name,
+      last_name: this.userInfo.last_name,
+      email: this.userInfo.email
+    });
   }
 
   updateMyProfile() {
@@ -93,5 +109,14 @@ export class EditprofileComponent implements OnInit {
         );
       }
     }
+  }
+
+  onFileSelected(field: string, event: any) {
+    const element = event.currentTarget as HTMLInputElement;
+    let file: File | null = null;
+    if (element.files && element.files.length) {
+      file = element.files[0];
+    }
+    this.userForm.get(field)?.setValue(file);
   }
 }
