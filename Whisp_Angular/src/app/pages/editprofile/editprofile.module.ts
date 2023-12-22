@@ -1,14 +1,14 @@
-// profile.module.ts
+// editprofile.module.ts
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyProfileComponent } from './my-profile.component';
+import { EditprofileComponent } from './editprofile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from '../../components/sidebar/sidebar.module';
 
 @NgModule({
-  declarations: [MyProfileComponent],
+  declarations: [EditprofileComponent],
   imports: [CommonModule, ReactiveFormsModule, SidebarModule],
-  exports: [MyProfileComponent],
+  exports: [EditprofileComponent],
 })
-export class MyprofileModule {}
+export class EditprofileModule {}

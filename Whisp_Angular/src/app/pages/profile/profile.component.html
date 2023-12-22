@@ -1,6 +1,6 @@
 <div class="flex flex-col items-center justify-center ml-56 min-h-screen">
     <div class="max-w-2xl overflow-hidden max-h-xl my-4 bg-white rounded-lg shadow-md" style='width: 50rem;'>
-        <img [src]="userProfile?.bg_image ?? BackGroundImage" class="-mt-3" style='margin-bottom: -100px; max-height: 16rem; width: 100%; object-fit: cover;' alt="avatar" />
+        <img [src]="userProfile?.bg_image ?? BackGroundImage" class="-mt-3" style='margin-bottom: -80px; max-height: 16rem; width: 100%; object-fit: cover;' alt="avatar" />
         <br>
         <br>
         <div class="flex justify-center -mt-8">
@@ -9,11 +9,11 @@
         <div class="mb-4">
             <label class="block text-lg font-medium text-black-600 text-center" style='font-size: 2rem;'>{{username}}</label>
         </div>
-        <div *ngIf="userInfo && userInfo.first_name !== null" class="mb-4 px-10">
+        <div *ngIf="userInfo && userInfo.first_name !== ''" class="mb-4 px-10">
             <label for="text" class="block text-lg font-medium text-gray-600">Name:</label>
             <label class="block text-lg text-grey-600 px-3 mt-1 p-2 border rounded-md w-full">{{ userInfo?.first_name }} {{ userInfo?.last_name }}</label>
         </div>
-        <div *ngIf="userInfo && userInfo.email !== null" class="mb-4 px-10">
+        <div *ngIf="userInfo && userInfo.email !== ''" class="mb-4 px-10">
             <label for="text" class="block text-lg font-medium text-gray-600">Email:</label>
             <label class="block text-lg text-grey-600 px-3 mt-1 p-2 border rounded-md w-full">{{ userInfo?.email }}</label>
         </div>
@@ -22,8 +22,8 @@
     <div class="max-w-2xl overflow-hidden max-h-xl my-4 bg-white rounded-lg shadow-md" style='width: 50rem;'>
         <br>
         <div *ngIf="userProfile?.biography !== ''" class="mb-4 px-10">
-            <label for="text" class="block text-lg font-medium text-gray-600">Biography</label>
-            <label class="block text-lg text-grey-600 px-3 mt-1 p-2 border rounded-md w-full">{{ userInfo?.first_name }} {{ userInfo?.last_name }}</label>
+            <label for="text" class="block text-lg text-center font-medium text-gray-600">Biography</label>
+            <label class="block text-lg text-grey-600 px-3 mt-1 p-2 border rounded-md w-full">{{ userProfile?.biography }}</label>
         </div>
         <div *ngIf="userProfile?.biography === ''" class="mb-4 px-10">
             <label for="text" class="block text-lg text-center font-medium text-gray-600">Biography</label>

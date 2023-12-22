@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { isPlatformBrowser } from '@angular/common';
-import { MyProfileModule } from './my-profile.module';
+import { MyprofileModule } from './my-profile.module';
 
 @Component({
   selector: 'app-my-profile',

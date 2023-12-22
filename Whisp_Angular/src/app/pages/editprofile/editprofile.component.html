@@ -1,0 +1,16 @@
+<!-- edit-my-profile.component.html -->
+
+<form [formGroup]="userForm" (ngSubmit)="updateMyProfile()" class="ml-56">
+  <label for="username">username:</label>
+  <input type="text" id="username" formControlName="username">
+    <!-- Form fields for updating user info -->
+    <label for="email">Email:</label>
+    <input type="text" id="email" formControlName="email">
+    
+    <!-- Form fields for updating user profile -->
+    <label for="biography">Bio:</label>
+    <input id="biography" formControlName="biography">
+    
+    <button type="submit">Update My Profile</button>
+  </form>
+  

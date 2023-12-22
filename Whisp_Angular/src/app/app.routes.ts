@@ -6,6 +6,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { EditprofileComponent } from './pages/editprofile/editprofile.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
     { path: 'create_post', component: CreatePostComponent },
     { path: '', component: HomepageComponent},
     { path: 'profile', component: ProfileComponent},
-    { path: 'my_profile', component: MyProfileComponent}
+    { path: 'my_profile', component: MyProfileComponent},
+    { path: 'edit_profile', component: EditprofileComponent}
 ];

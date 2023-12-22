@@ -131,7 +131,13 @@ export class AuthService {
     );
   }
 
+  updateUserInfo(username: string, updatedUserInfo: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}user_info/${username}/`, updatedUserInfo);
+  }
 
+  updateUserProfile(id: number, updatedUserProfile: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}profile/user/${id}/`, updatedUserProfile);
+  }
 
 
 

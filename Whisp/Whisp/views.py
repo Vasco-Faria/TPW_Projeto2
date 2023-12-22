@@ -33,12 +33,20 @@ class UserListView(ListAPIView):
 
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT']) 
 @permission_classes([AllowAny])
 def get_user_info(request, username):
     try:
         user = User.objects.get(username=username)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+        if request.method == 'GET':
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+        elif request.method == 'PUT':
+            serializer = UserSerializer(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     except User.DoesNotExist:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
