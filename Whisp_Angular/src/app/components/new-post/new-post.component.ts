@@ -51,7 +51,7 @@ export class NewPostComponent {
 
 
     console.log(formData);
-    this.http.post('http://localhost:8000/post/create/', formData).subscribe(
+    this.http.post('https://vascomfaria.pythonanywhere.com/post/create/', formData).subscribe(
       response => {
         console.log('Post criado com sucesso', response);
 

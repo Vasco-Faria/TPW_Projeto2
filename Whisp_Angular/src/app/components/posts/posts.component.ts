@@ -38,7 +38,7 @@ export class PostsComponent implements OnInit {
  }
 
  getPosts(): Observable<any> {
-   return this.http.get('http://localhost:8000/posts/');
+   return this.http.get('https://vascomfaria.pythonanywhere.com/posts/');
  }
 
 

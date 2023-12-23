@@ -51,7 +51,7 @@ export class CreatePostComponent {
       formData.append('video', this.postForm.value.video);
     }
 
-    this.http.post('http://localhost:8000/post/create/', formData).subscribe(
+    this.http.post('https://vascomfaria.pythonanywhere.com/post/create/', formData).subscribe(
       response => {
         console.log('Post criado com sucesso', response);
 
