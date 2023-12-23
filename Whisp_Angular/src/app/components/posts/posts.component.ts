@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PostsModule } from './posts.module';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+
 
 @Component({
  selector: 'app-posts',
@@ -11,11 +13,24 @@ import { Router } from '@angular/router';
  styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
- posts: any[] = [];
+  posts: any[] = [];
+  username: string | null = null;
+  userInfo: any = null;showDeleteConfirmation = false;
+  currentPostId: number = 0;
 
- constructor(private http: HttpClient, private authService: AuthService, private router: Router) { }
+
+ constructor(private http: HttpClient, private authService: AuthService, private router: Router, 
+  @Inject(PLATFORM_ID) private platformId: any) { }
 
  ngOnInit() {
+  if (isPlatformBrowser(this.platformId)) {
+    const userInfoString = localStorage.getItem('userInfo');
+    if (userInfoString) {
+      const userInfo = JSON.parse(userInfoString);
+      this.username = userInfo.username;
+      this.userInfo = userInfo;
+    }
+  }
    this.getPosts().subscribe(data => {
      this.posts = data;
    });
@@ -52,5 +67,32 @@ export class PostsComponent implements OnInit {
         console.error('Profile retrieval failed', error);
       }
     );
+  }
+
+  deleteThisPost(postId: number) {
+    this.authService.deletePost(postId).subscribe(
+      (response) => {
+        console.log('Post deleted successfully', response);
+        
+        // Recarrega a página atual
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate([this.router.url]);
+      },
+      (error) => {
+        console.error('Failed to delete post', error);
+      }
+    );
+  }
+
+
+  openDeleteConfirmation(postId: number): void {
+    this.showDeleteConfirmation = true;
+    this.currentPostId = postId;
+  }
+
+  closeDeleteConfirmation(): void {
+    this.currentPostId = 0;
+    this.showDeleteConfirmation = false;
   }
 }

@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import RetrieveAPIView
 from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny
 
 
 
@@ -54,14 +55,11 @@ class PostCreateAPIView(APIView):
     
 class DeletePostAPIView(DestroyAPIView):
     queryset = Post.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]
 
     def perform_destroy(self, instance):
         user = self.request.user
-        if user == instance.author or user.is_staff:
-            instance.delete()
-        else:
-            raise PermissionDenied("Você não tem permissão para excluir este post.")
+        instance.delete()
 
 
 class CreateCommentAPIView(APIView):

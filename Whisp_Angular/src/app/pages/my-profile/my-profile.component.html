@@ -9,6 +9,16 @@
         <div class="mb-4">
             <label class="block text-lg font-medium text-black-600 text-center" style='font-size: 2rem;'>{{username}}</label>
         </div>
+        <div class="flex items-center justify-center">
+            <div *ngIf="userInfo && userInfo.date_joined !== ''" class="mb-4 px-10">
+                <label for="text" class="block text-lg font-medium text-gray-600">Date Joined:</label>
+                <label class="block text-lg text-grey-600 px-3 mt-1 p-2 border rounded-md w-full">{{ userInfo?.date_joined | date:'short' }}</label>
+            </div>
+            <div *ngIf="userInfo && userInfo.last_login !== ''" class="mb-4 px-10">
+                <label for="text" class="block text-lg font-medium text-gray-600">Last Login:</label>
+                <label class="block text-lg text-grey-600 px-3 mt-1 p-2 border rounded-md w-full">{{ userInfo?.last_login | date:'short' }}</label>
+            </div>
+        </div>
         <div *ngIf="userInfo && userInfo.first_name !== ''" class="mb-4 px-10">
             <label for="text" class="block text-lg font-medium text-gray-600">Name:</label>
             <label class="block text-lg text-grey-600 px-3 mt-1 p-2 border rounded-md w-full">{{ userInfo?.first_name }} {{ userInfo?.last_name }}</label>
