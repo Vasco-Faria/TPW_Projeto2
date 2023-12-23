@@ -15,8 +15,8 @@ export class ProfileComponent implements OnInit {
   username: string | null = null;
   userInfo: any = null;
   userProfile: any = null;
-  BackGroundImage: string = 'https://vascomfaria.pythonanywhere.com/media/bg_image/back_default.jpg';
-  ProfileImage: string = 'https://vascomfaria.pythonanywhere.com/media/profiles/default_user.jpg';
+  BackGroundImage: string = 'http://vascomfaria.pythonanywhere.com/media/bg_image/back_default.jpg';
+  ProfileImage: string = 'http://vascomfaria.pythonanywhere.com/media/profiles/default_user.jpg';
   userposts: any[] = [];
   showDeleteConfirmation = false;
   currentPostId: number = 0;
@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
 
 
 getUserPosts(username: string): Observable<any> {
-  return this.http.get(`https://vascomfaria.pythonanywhere.com/posts/${username}/`);
+  return this.http.get(`http://vascomfaria.pythonanywhere.com/posts/${username}/`);
 }
 
 

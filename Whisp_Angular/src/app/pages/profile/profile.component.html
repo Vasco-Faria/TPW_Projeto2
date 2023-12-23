@@ -1,10 +1,10 @@
 <div class="flex flex-col items-center justify-center ml-56 ">
     <div class="max-w-2xl overflow-hidden max-h-xl my-4 bg-white rounded-lg shadow-md" style='width: 50rem;'>
-        <img [src]="(userProfile?.bg_image ?? BackGroundImage)" class="-mt-3" style='margin-bottom: -80px; max-height: 16rem; width: 100%; object-fit: cover;' alt="avatar" />
+        <img [src]="'http://vascomfaria.pythonanywhere.com'+(userProfile?.bg_image ?? BackGroundImage)" class="-mt-3" style='margin-bottom: -80px; max-height: 16rem; width: 100%; object-fit: cover;' alt="avatar" />
         <br>
         <br>
         <div class="flex justify-center -mt-8">
-            <img [src]="(userProfile?.image ?? ProfileImage)" class="rounded-full border-solid border-white border-2 -mt-3" alt="avatar" style="width: 150px; height: 150px;" />
+            <img [src]="'http://vascomfaria.pythonanywhere.com'+(userProfile?.image ?? ProfileImage)" class="rounded-full border-solid border-white border-2 -mt-3" alt="avatar" style="width: 150px; height: 150px;" />
         </div>
         <div class="mb-4">
             <label class="block text-lg font-medium text-black-600 text-center" style='font-size: 2rem;'>{{username}}</label>
