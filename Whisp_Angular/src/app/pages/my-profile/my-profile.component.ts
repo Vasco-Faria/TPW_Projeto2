@@ -15,8 +15,8 @@ export class MyProfileComponent implements OnInit {
   username: string | null = null;
   userInfo: any = null;
   userProfile: any = null;
-  BackGroundImage: string = 'http://localhost:8000/media/bg_image/back_default.jpg';
-  ProfileImage: string = 'http://localhost:8000/media/profiles/default_user.jpg';
+  BackGroundImage: string = 'http://vascomfaria.pythonanywhere.com/media/bg_image/back_default.jpg';
+  ProfileImage: string = 'http://vascomfaria.pythonanywhere.com/media/profiles/default_user.jpg';
   userposts: any[] = [];
   showDeleteConfirmation = false;
   currentPostId: number = 0;

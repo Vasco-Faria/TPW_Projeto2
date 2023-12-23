@@ -12,7 +12,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 export class AuthService {
   private currentUser: any = null;
   private isAuthenticated = false;
-  private apiUrl = 'http://localhost:8000/';
+  private apiUrl = 'http://vascomfaria.pythonanywhere.com';
 
   constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {
     this.checkAuthentication();
