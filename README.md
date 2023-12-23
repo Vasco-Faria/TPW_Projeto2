@@ -20,18 +20,18 @@
 | For the client side, it must be developed with Angular technology, to provide all needed user interfaces.| X |
 | For server side, it must use Django REST Framework (DRF), to provide a set of REST Web Services, to provide all needed functionalities in back-end, to allow all kind of operations: data searching, insertion, updating, deleting and all subsequent validations| X |
 | Development of an authentication system, using e.g. Django Rest Framework Authentication. | X |
-| In order to be accessed from anywhere and use a real n-tier software architecture, the deployment can be done for the different application’s layers. The server side (DRF) can be deployed at pythonanywhere.com, as before for the Django application, and the client side at Heroku |  |
+| In order to be accessed from anywhere and use a real n-tier software architecture, the deployment can be done for the different application’s layers. The server side (DRF) can be deployed at pythonanywhere.com, as before for the Django application, and the client side at Heroku | X |
 | A small report describing the main fundamental parts implemented, and any other information needed to run the application, is necessary. | X |
 
 ## 3. Funcionalidades Atuais
 
 Neste momento, as funcionalidades principais incluem:
 - Registro e autenticação de users.
-- Criação e visualização de posts (Upload de Texto, ?Foto?, ?Video?).
+- Criação e visualização de posts (Upload de Texto, Imagem).
 - Informação com/de posts (Data de criação, Autor).
 - Página de Feed (Posts de todos os users).
-- ?Perfil de User (Informações, Foto de Perfil)?
-- ?Personalização de Perfil (Avatar)?
+- Perfil de User (Informações, Foto de Perfil, Biografia)
+- Personalização de Perfil (Avatar)
 
 ## Test Accounts        ?trocar para outra?
 - User
@@ -40,10 +40,19 @@ Neste momento, as funcionalidades principais incluem:
     password: Olaolaola
     ```
 
-## Comandos Uteis
-- npm install -g @angular/cli
+## Deployment
 
-1. python3  -m venv venv
-2. source venv/bin/activate
-3. pip install -r requirements.txt
-4. pip install pip --upgrade
+- [Heroku](https://tpw2-social-network.herokuapp.com/)
+- [PythonAnywhere](http://miguelmiragaia.pythonanywhere.com/)
+
+| ENDPOINT |	METHOD |	DESCRIPTION |
+|:---: |:---:| :---: |
+| posts/	| GET |	Retorna os posts de todos os users |
+| posts/create/ |	POST |	Criação de um post |
+| profile/user/<number:id>/ |	PUT |	Atualização de um perfil de um user por id. |
+| profile/user/<number:id>/ |	GET |	Obtenção de um perfil de um user por id. |
+| change-password/ |	PUT |	Troca de password de um user já existente. |
+| user_info/<str:username>/ |	GET |	Obtenção de informação por username. |
+| user_info/<str:username>/ |	PUT |	Atualização de informação por username. |
+| rest-auth/login/ |	POST |	Login de user existente para obtenção do token de autenticação de user. |
+| rest-auth/registration/ |	POST |	Registo de um novo user, fornece o token de autenticação de user. |
