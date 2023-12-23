@@ -2,11 +2,11 @@
 
 <form [formGroup]="userForm" (ngSubmit)="updateMyProfile()" class="flex flex-col items-center justify-center ml-56 min-h-screen" enctype="multipart/form-data">
   <div class="max-w-2xl overflow-hidden max-h-xl my-4 bg-white rounded-lg shadow-md" style='width: 50rem;'>
-      <img [src]="'http://localhost:8000/' +(userProfile?.bg_image ?? BackGroundImage)" class="-mt-3" style='margin-bottom: -50px; max-height: 8rem; width: 100%; object-fit: cover;' alt="avatar" />
+      <img [src]="(userProfile?.bg_image ?? BackGroundImage)" class="-mt-3" style='margin-bottom: -50px; max-height: 8rem; width: 100%; object-fit: cover;' alt="avatar" />
       <br>
       <br>
       <div class="flex justify-center -mt-8">
-          <img [src]="'http://localhost:8000/' +(userProfile?.image ?? ProfileImage)" class="rounded-full border-solid border-white border-2 -mt-3" alt="avatar" style="width: 100px; height: 100px;" />
+          <img [src]="(userProfile?.image ?? ProfileImage)" class="rounded-full border-solid border-white border-2 -mt-3" alt="avatar" style="width: 100px; height: 100px;" />
       </div>
       <div class="mb-4 px-56">
           <input type="text" id="username" formControlName="username" class="block text-lg font-medium text-black-600 text-center px-3 mt-1 p-2 border rounded-md w-full" style='font-size: 1.5rem;'>
