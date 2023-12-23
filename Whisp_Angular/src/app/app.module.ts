@@ -15,10 +15,11 @@ import { EditprofileModule } from './pages/editprofile/editprofile.module';
 import { ProfileModule } from './pages/profile/profile.module';
 import { MyprofileModule } from './pages/my-profile/my-profile.module';
 import { ForgotPasswordModule } from './pages/forgot-password/forgot-password.module';
+import {DetailPostsModule} from './pages/detail-posts/detail-posts.module'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule, FormsModule, LoginModule, RegistrationModule, PostsModule, HomepageModule, SidebarModule, Create_PostModule, EditprofileModule, ProfileModule, MyprofileModule, ForgotPasswordModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, FormsModule, LoginModule, RegistrationModule, PostsModule, HomepageModule, SidebarModule, Create_PostModule, EditprofileModule, ProfileModule, MyprofileModule, ForgotPasswordModule,DetailPostsModule],
   providers: [NgModel], 
   bootstrap: [AppComponent],
 })

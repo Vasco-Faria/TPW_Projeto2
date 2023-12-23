@@ -17,7 +17,6 @@ export class PostsComponent implements OnInit {
 
  ngOnInit() {
    this.getPosts().subscribe(data => {
-    console.log('Posts received:', data);
      this.posts = data;
    });
  }
@@ -25,6 +24,10 @@ export class PostsComponent implements OnInit {
  getPosts(): Observable<any> {
    return this.http.get('http://localhost:8000/posts/');
  }
+
+ goToPostDetails(postId: number) {
+  this.router.navigate(['/postDetails', postId]);
+}
 
  profile(username: string) {
   this.authService.otherprofile(username).subscribe(

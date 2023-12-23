@@ -16,7 +16,7 @@
     </ng-template>
 
     <ng-template #postTemplate let-post="post" let-showDetailLink="showDetailLink">
-        <div class="flex justify-center">
+        <div class="flex justify-center" >
             <div class="max-w-2xl max-h-xl px-10 my-4 py-6 bg-white rounded-lg shadow-md" style='width:50rem;'>
                 <div class="flex justify-between items-center w-full">
                     <span class="font-light text-gray-600">{{ post.date | date:'short' }}</span>
@@ -36,6 +36,7 @@
                 </div>
 
                 <div class="flex justify-between items-center mt-3">
+                    <a class="text-blue-600 hover:underline" (click)="goToPostDetails(post.id)" >Read More</a>
                     <div class="ml-auto">
                         <a class="flex items-center" (click)="profile(post.author_username)">
                             <img [src]="'http://localhost:8000' + post.author_image" class='mx-4 w-10 h-10 object-cover rounded-full hidden sm:block' alt='avatar'>
