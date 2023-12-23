@@ -15,7 +15,8 @@ import { isPlatformBrowser } from '@angular/common';
 export class PostsComponent implements OnInit {
   posts: any[] = [];
   username: string | null = null;
-  userInfo: any = null;showDeleteConfirmation = false;
+  userInfo: any = null;
+  showDeleteConfirmation = false;
   currentPostId: number = 0;
 
 
@@ -40,9 +41,6 @@ export class PostsComponent implements OnInit {
    return this.http.get('http://localhost:8000/posts/');
  }
 
- goToPostDetails(postId: number) {
-  this.router.navigate(['/postDetails', postId]);
-}
 
  profile(username: string) {
   this.authService.otherprofile(username).subscribe(

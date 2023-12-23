@@ -149,7 +149,7 @@ export class AuthService {
   }
 
   deletePost(id: number): Observable<any> {
-    // Note: Make sure to include the authorization header with the user's token
     return this.http.delete(`${this.apiUrl}post/${id}/delete/`);
   }
+
 }
