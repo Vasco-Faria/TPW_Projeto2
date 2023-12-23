@@ -72,8 +72,13 @@ export class EditprofileComponent implements OnInit {
 
   updateMyProfile() {
     if (this.username) {
-      // Get the form values
-      const formData = this.userForm.value;
+      const formData = new FormData();
+      Object.keys(this.userForm.value).forEach(key => {
+        if (this.userForm.value[key] !== null) {
+          formData.append(key, this.userForm.value[key]);
+        }
+      });
+      
 
       // Update user info
       this.authService.updateUserInfo(this.username, formData).subscribe(
