@@ -8,6 +8,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { EditprofileModule } from './editprofile.module';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-editprofile',
@@ -26,18 +27,18 @@ export class EditprofileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, // Inject FormBuilder
+    private cdr: ChangeDetectorRef,
     private authService: AuthService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
-    // Initialize the form in the constructor
     this.userForm = this.formBuilder.group({
       username: [''],
       first_name: [''],
       last_name: [''],
       email: [''],
-      Image: [null],
-      BackGroundImage: [null],
+      image: [null],
+      bg_image: [null],
       biography: ['']
     });
   }
@@ -57,10 +58,7 @@ export class EditprofileComponent implements OnInit {
         (userProfile) => {
           console.log('User Profile retrieval successful', userProfile);
           this.userProfile = userProfile;
-
-          this.userForm.patchValue({
-            biography: userProfile.biography
-          });
+          this.userForm.patchValue(this.userProfile);
         },
         (error) => {
           console.error('User Profile retrieval failed', error);
@@ -72,8 +70,38 @@ export class EditprofileComponent implements OnInit {
 
   updateMyProfile() {
     if (this.username) {
-      // Get the form values
-      const formData = this.userForm.value;
+      // Create a new FormData object
+      const formData = new FormData();
+
+      console.log('image', this.userProfile.image);
+      console.log('bg_image', this.userProfile.bg_image);
+
+  
+      // Append the necessary fields to the FormData
+      formData.append('username', this.userForm.value.username);
+      formData.append('first_name', this.userForm.value.first_name);
+      formData.append('last_name', this.userForm.value.last_name);
+      formData.append('email', this.userForm.value.email);
+      formData.append('biography', this.userForm.value.biography);
+  
+
+      const ImageFile = this.userForm.value.image !== this.userProfile.image;
+      if (ImageFile) {
+        console.log('image data', this.userForm.value.image);
+        formData.append('image', this.userForm.value.image);
+      }
+      
+      const bgImageFile = this.userForm.value.bg_image !== this.userProfile.bg_image;
+      if (bgImageFile) {
+        console.log('bg_image data', this.userForm.value.bg_image);
+        formData.append('bg_image', this.userForm.value.bg_image);
+      }
+
+      console.log('formdata', formData);
+
+      console.log('image', this.userProfile.image);
+      console.log('bg_image', this.userProfile.bg_image);
+
 
       // Update user info
       this.authService.updateUserInfo(this.username, formData).subscribe(
@@ -114,5 +142,9 @@ export class EditprofileComponent implements OnInit {
       file = element.files[0];
     }
     this.userForm.get(field)?.setValue(file);
+
+
+    // Manually trigger change detection
+    this.cdr.detectChanges();
   }
 }

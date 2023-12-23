@@ -28,11 +28,11 @@
       <div class="flex items-center justify-center">
         <div class="mb-4 px-10">
             <label for="image" class="block text-lg font-medium text-gray-600">Profile Image:</label>
-            <input type="file" id="image" formControlName="Image" (change)="onFileSelected('Image', $event)" class="mt-1 p-2 border rounded-md w-full">
+            <input type="file" id="image" (change)="onFileSelected('image', $event)" class="mt-1 p-2 border rounded-md w-full">
         </div>
         <div class="mb-4 px-10">
             <label for="bg_image" class="block text-lg font-medium text-gray-600">BackGround Image:</label>
-            <input type="file" id="bg_image" formControlName="BackGroundImage" (change)="onFileSelected('BackGroundImage', $event)" class="mt-1 p-2 border rounded-md w-full">
+            <input type="file" id="bg_image" (change)="onFileSelected('bg_image', $event)" class="mt-1 p-2 border rounded-md w-full">
         </div>
       </div>
       <div class="mb-4 px-10">
