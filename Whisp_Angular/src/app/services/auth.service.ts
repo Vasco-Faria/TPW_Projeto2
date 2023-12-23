@@ -60,6 +60,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('key');
+    localStorage.removeItem('userInfo');
   }
 
   getUserInfo(username: string): Observable<any> {

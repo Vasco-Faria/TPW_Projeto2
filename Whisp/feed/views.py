@@ -18,13 +18,20 @@ class PostListAPIView(APIView):
         posts = Post.objects.all().order_by('-id')[:60]
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
-    
+
+
+class UserPostsListAPIView(APIView):
+    def get(self, request, username, format=None):
+        posts = Post.objects.filter(author__username=username).order_by('-id')[:60]
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)    
 
 
 class PostCreateAPIView(APIView):
     def post(self, request, format=None):
         print(request.data)
         serializer = PostSerializerHomepage(data=request.data)
+        
         
 
         if serializer.is_valid():

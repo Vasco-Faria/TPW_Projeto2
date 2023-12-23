@@ -49,6 +49,8 @@ export class NewPostComponent {
       formData.append('video', this.postForm.value.video);
     }
 
+
+    console.log(formData);
     this.http.post('http://localhost:8000/post/create/', formData).subscribe(
       response => {
         console.log('Post criado com sucesso', response);

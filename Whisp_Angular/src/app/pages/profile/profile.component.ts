@@ -38,7 +38,6 @@ export class ProfileComponent implements OnInit {
         (userProfile) => {
           console.log('User Profile retrieval successful', userProfile);
           this.userProfile = userProfile;
-          // Additional logic if necessary
         },
         (error) => {
           console.error('User Profile retrieval failed', error);
