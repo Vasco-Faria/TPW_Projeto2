@@ -38,7 +38,7 @@
                 <div class="flex justify-between items-center mt-3">
                     <div class="ml-auto">
                         <a class="flex items-center" (click)="profile(post.author_username)">
-                            <img src="{{ post.image }}" class='mx-4 w-10 h-10 object-cover rounded-full hidden sm:block' alt='avatar'>
+                            <img [src]="'http://localhost:8000' + post.author_image" class='mx-4 w-10 h-10 object-cover rounded-full hidden sm:block' alt='avatar'>
                             <h1 class="text-gray-700 font-bold" style="margin-right: 1rem;">{{ post.author_username }}</h1>
                         </a>
                     </div>

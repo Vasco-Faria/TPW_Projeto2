@@ -5,9 +5,11 @@ class PostSerializer(serializers.ModelSerializer):
     likes_count = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
     author_username = serializers.SerializerMethodField()
+    author_image=serializers.SerializerMethodField()
+    
     class Meta:
         model = Post
-        fields = ['id', 'text', 'image', 'video', 'author_username', 'date','likes_count', 'comments_count']
+        fields = ['id', 'text', 'image', 'video', 'author_username', 'date','likes_count', 'comments_count','author_image']
 
     def get_author_username(self, obj):
         return obj.author.username
@@ -17,6 +19,11 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_comments_count(self, obj):
         return Comment.objects.filter(post=obj).count() 
+    
+    def get_author_image(self, obj):
+        if obj.author.profile.image:
+            return obj.author.profile.image.url
+        return None
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
